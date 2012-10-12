@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{250A6D58-29C6-416A-87BF-916D37BC5E1C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Ash</RootNamespace>
+    <AssemblyName>Ash</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\Entity.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\EntityList.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\Family.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\Node.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\NodeList.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\NodePool.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\Process.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\ProcessList.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\Component.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\Ash.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\NodeMap.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\NodeMultiMap.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="src\" />
+  </ItemGroup>
+</Project>
