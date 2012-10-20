@@ -27,7 +27,7 @@ namespace com.copperbyte.ash.core
 			mEntitys.Remove(entity);
 		}
 		
-		internal void RemoveAll()
+		internal void Clear()
 		{
 			mEntitys.Clear();
 		}

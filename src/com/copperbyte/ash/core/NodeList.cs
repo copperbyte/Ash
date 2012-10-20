@@ -23,7 +23,7 @@ namespace com.copperbyte.ash.core
 	 * NodeList it's previous and next properties still point to the nodes that were before and after
 	 * it in the NodeList just before it was removed.</p>
 	 */
-	public class NodeList<NT> where NT:Node
+	public class NodeList<NT> : /*IReadOnlyList<NT>,*/ IEnumerable<NT> where NT:Node
 	{
 		// snip linked list implimentation
 		internal List<NT> mNodes;	
@@ -57,14 +57,15 @@ namespace com.copperbyte.ash.core
 				nodeAdded( node );
 		}
 		
-		internal void Remove( NT node )
+		internal bool Remove( NT node )
 		{
-			mNodes.Remove(node);
-			if(nodeRemoved != null)
+			bool result = mNodes.Remove(node);
+			if(nodeRemoved != null) 
 				nodeRemoved( node );
+			return result;
 		}
 		
-		internal void RemoveAll()
+		internal void Clear()
 		{
 			foreach(NT node in mNodes) {
 				mNodes.Remove(node);
@@ -109,5 +110,48 @@ namespace com.copperbyte.ash.core
 				mNodes.RemoveAt(index1);
 			}			
 		}
+
+
+		public int IndexOf(NT item)
+		{
+			return mNodes.IndexOf(item);
+		}
+
+		#region IReadOnlyList<T> implementation
+
+		public int Count {
+			get {
+				return mNodes.Count;
+			}
+
+		}
+
+		public NT this[int index] {
+			get {
+				return mNodes[index];
+			}
+			//set {
+			//	mNodes[index] = value;
+			//}
+		}
+		#endregion
+
+		#region IEnumerable implementation
+
+		public IEnumerator<NT> GetEnumerator()
+		{
+			return mNodes.GetEnumerator();
+		}
+
+		#endregion
+
+		#region IEnumerable implementation
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return mNodes.GetEnumerator();
+		}
+
+		#endregion
 	}
 }

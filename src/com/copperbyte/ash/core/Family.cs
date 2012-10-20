@@ -75,7 +75,8 @@ namespace com.copperbyte.ash.core
 			nodePool.dispose( nodePool.get() ); // create a dummy instance to ensure describeType works.
 			
 			System.Console.WriteLine(" Family.init nodeClass : {0} ", nodeClass.ToString());
-			
+
+			// I like how it solves my problems, but I don't like that it uses Reflection
 			PropertyInfo[] props = nodeClass.GetProperties();
 			foreach(PropertyInfo prop in props) {
 				Type type = prop.PropertyType;
@@ -244,7 +245,7 @@ namespace com.copperbyte.ash.core
 				pair.Value.RemoveAll();
 			}
 			maps.Clear();
-			nodes.RemoveAll();
+			nodes.Clear();
 		}
 		
 		private void componentRemoved( Entity entity, Type componentClass )

@@ -32,7 +32,7 @@ namespace com.copperbyte.ash.core
 	 * NodeList it's previous and next properties still point to the nodes that were before and after
 	 * it in the NodeList just before it was removed.</p>
 	 */
-	public class NodeMap<CK, NT> : INodeMap where CK:Component where NT:Node
+	public class NodeMap<CK, NT> : INodeMap, IEnumerable<KeyValuePair<CK, NT>> where CK:Component where NT:Node
 	{
 		// snip linked list implimentation
 		internal Dictionary<CK, NT> mNodes;	
@@ -124,5 +124,61 @@ namespace com.copperbyte.ash.core
 			}			
 		}
 		*/
+
+		#region IReadOnlyDictionary<TKey, TValue> implementation
+		public int Count {
+			get {
+				return mNodes.Count;
+			}	
+		}
+		
+		public NT this[CK index] {
+			get {
+				return mNodes[index];
+			}
+			//set {
+			//	mNodes[index] = value;
+			//}
+		}
+
+		public IEnumerable<CK> Keys { 
+			get {
+				return mNodes.Keys;
+			}
+		}
+
+		public IEnumerable<NT> Values { 
+			get {
+				return mNodes.Values;
+			}
+		}
+
+		public bool ContainsKey(CK key) 
+		{
+			return mNodes.ContainsKey(key);
+		}
+
+		public bool TryGetValue(CK key, out NT value) {
+			return mNodes.TryGetValue(key, out value);
+		}
+		#endregion
+
+		#region IEnumerable implementation
+
+		public IEnumerator<KeyValuePair<CK, NT>> GetEnumerator()
+		{
+			return mNodes.GetEnumerator();
+		}
+
+		#endregion
+
+		#region IEnumerable implementation
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return mNodes.GetEnumerator();
+		}
+
+		#endregion
 	}
 }
