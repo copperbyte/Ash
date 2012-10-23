@@ -73,6 +73,21 @@ namespace com.copperbyte.ash.core
 				componentAdded( this, componentClass );
 		}
 
+		public void Add<CT>( CT component ) where CT : Component
+		{
+			//if ( componentClass != null)
+			//{
+			Type componentClass = typeof(CT);
+			//}
+			if ( mComponents.ContainsKey( componentClass ) )
+			{
+				Remove( componentClass );
+			}
+			mComponents[ componentClass ] = (Component)component;
+			if(componentAdded != null)
+				componentAdded( this, componentClass );
+		}
+
 		/**
 		 * Remove a component from the entity.
 		 * 
@@ -81,6 +96,20 @@ namespace com.copperbyte.ash.core
 		 */
 		public Component Remove( Type componentClass )
 		{
+			if ( mComponents.ContainsKey(componentClass) )
+			{
+				Component component = mComponents[ componentClass ];
+				mComponents.Remove(componentClass);
+				if(componentRemoved != null)
+					componentRemoved( this, componentClass );
+				return component;
+			}
+			return null;
+		}
+
+		public Component Remove<CT>() where CT : Component
+		{
+			Type componentClass = typeof(CT);
 			if ( mComponents.ContainsKey(componentClass) )
 			{
 				Component component = mComponents[ componentClass ];

@@ -24,6 +24,31 @@ namespace com.copperbyte.ash.test
 		}*/
 	}
 
+	public class Name : Component
+	{
+		public string Value;
+	}
+
+	public class TestNode : Node
+	{
+		public Id Pos  {
+			get { return (Id)entity.Get<Id>(); }
+			set { entity.Add( value ); }
+		}
+		
+		public Name Name  {
+			get { return entity.Get<Name>(); }
+			set { entity.Add( value ); }
+		}
+		
+		public TestNode ()
+		{
+			;
+		}
+	}
+
+
+
 	[TestFixture]
 	public class AshTest
 	{
@@ -45,6 +70,27 @@ namespace com.copperbyte.ash.test
 			id.Value = 1;
 			entity.Add(id);
 			Assert.AreEqual(entity.Get<Id>(), id);
+		}
+
+
+		[Test]
+		public void testEntityNodeList() {
+			Entity entity = new Entity();
+			Id id = new Id();
+			id.Value = 1;
+			entity.Add(id);
+			Name name = new Name();
+			name.Value = "bob";
+			entity.Add(name);
+
+			NodeList<TestNode> nodeList = Ash.GetNodeList<TestNode>();
+			Assert.AreEqual(nodeList.Count, 0);
+
+			Ash.AddEntity(entity);
+			Assert.AreEqual(nodeList.Count, 1);
+
+			Ash.RemoveEntity(entity);
+			Assert.AreEqual(nodeList.Count, 0);
 		}
 
 
