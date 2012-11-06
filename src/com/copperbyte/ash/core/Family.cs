@@ -180,7 +180,10 @@ namespace com.copperbyte.ash.core
 				node.entity = entity;
 				foreach ( KeyValuePair<Type, String> pair in components )
 				{
-					node.mComponents.Add(pair.Key, entity.Get( pair.Key ) );
+					if(!node.mComponents.ContainsKey(pair.Key))
+						node.mComponents.Add(pair.Key, entity.Get( pair.Key ) );
+					else
+						node.mComponents[pair.Key] = entity.Get( pair.Key );
 				}
 				entities[entity] = node;
 				entity.componentRemoved += componentRemoved;

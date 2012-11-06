@@ -50,9 +50,9 @@ namespace com.copperbyte.ash.core
 		internal void releaseCache()
 		{
 			foreach(NT node in mCache) {
-				mCache.Remove(node);
 				mQueue.Enqueue(node);
 			}
+			mCache.Clear();	
 		}
 	}
 }

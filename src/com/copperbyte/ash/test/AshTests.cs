@@ -93,7 +93,25 @@ namespace com.copperbyte.ash.test
 			Assert.AreEqual(nodeList.Count, 0);
 		}
 
+		[Test]
+		public void testRemoveComponent() {
+			Entity entity = new Entity();
+			Id id = new Id();
+			id.Value = 1;
+			entity.Add(id);
+			Name name = new Name();
+			name.Value = "bob";
+			entity.Add(name);
+			
+			NodeList<TestNode> nodeList = Ash.GetNodeList<TestNode>();
 
+			Ash.AddEntity(entity);
+			//Ash.RemoveEntity(entity);
+			Assert.AreEqual(nodeList.Count, 1);
+
+			entity.Remove(typeof(Name));
+			Assert.AreEqual(nodeList.Count, 0); // entity should no longer be in nodeList
+		}
 
 	}
 }
