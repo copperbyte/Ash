@@ -84,6 +84,9 @@ namespace com.copperbyte.ash.core
 				   components.ContainsKey(type) == false) {
 					if(type.Name == "Entity" && prop.Name == "entity")
 						continue;
+					if(!type.IsSubclassOf(typeof(Component)))
+						continue;
+
 					System.Console.WriteLine(" Family.init props : {0} : {1} ", type.Name, prop.Name);
 
 					components.Add(type, type.Name);
