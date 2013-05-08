@@ -80,7 +80,9 @@ namespace com.copperbyte.ash.core
 		}
 
 		/**
-		 * Check if an entity is also a node 
+		 *  Check if an entity is also a node 
+		 *  This is a 'light' function, that only checks already known entities
+		 *  It will return false for any Entity that was not Added to the Ash
 		 */
 		public bool Is<NT>(Entity entity) where NT:Node, new() 
 		{
@@ -99,7 +101,9 @@ namespace com.copperbyte.ash.core
 		}
 
 		/**
-		 * Get an entity as a node if it qualifies
+		 *  Get an entity as a node if it qualifies
+		 *  This is a 'light' function, that only checks already known entities
+		 *  It will return null for any Entity that was not Added to the Ash
 		 */
 		public NT As<NT>(Entity entity) where NT:Node, new() 
 		{
