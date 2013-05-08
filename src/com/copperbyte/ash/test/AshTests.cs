@@ -124,7 +124,7 @@ namespace com.copperbyte.ash.test
 			entity.Add(name);
 			
 			NodeList<TestNode> nodeList = Ash.GetNodeList<TestNode>();
-			
+
 			Ash.AddEntity(entity);
 			Assert.AreEqual(nodeList.Count, 1);
 			
@@ -132,5 +132,83 @@ namespace com.copperbyte.ash.test
 			Assert.AreEqual(nodeList.Count, 0); // entity should no longer be in nodeList
 		}
 
+		[Test]
+		public void testFamilyIs() {
+			Entity entity = new Entity();
+
+			NodeList<TestNode> nodeList = Ash.GetNodeList<TestNode>();
+			Assert.AreEqual(nodeList.Count, 0);
+
+			bool IsNode = false;
+
+			IsNode = Ash.Is<TestNode>(entity);
+			Assert.AreEqual(IsNode, false);
+
+			Id id = new Id();
+			id.Value = 1;
+			entity.Add(id);
+
+			IsNode = Ash.Is<TestNode>(entity);
+			Assert.AreEqual(IsNode, false);
+
+			Name name = new Name();
+			name.Value = "bob";
+			entity.Add(name);
+			
+						
+			Ash.AddEntity(entity);
+			Assert.AreEqual(nodeList.Count, 1);
+			
+			IsNode = Ash.Is<TestNode>(entity);
+			Assert.AreEqual(IsNode, true);
+
+			Ash.RemoveEntity(entity);
+			Assert.AreEqual(nodeList.Count, 0); // entity should no longer be in nodeList
+		}
+
+
+		[Test]
+		public void testFamilyAs() {
+			Entity entity = new Entity();
+			
+			NodeList<TestNode> nodeList = Ash.GetNodeList<TestNode>();
+			Assert.AreEqual(nodeList.Count, 0);
+			
+			bool IsNode = false;
+			
+			IsNode = Ash.Is<TestNode>(entity);
+			Assert.AreEqual(IsNode, false);
+			
+			Id id = new Id();
+			id.Value = 1;
+			entity.Add(id);
+			
+			IsNode = Ash.Is<TestNode>(entity);
+			Assert.AreEqual(IsNode, false);
+
+			Ash.AddEntity(entity);
+
+			IsNode = Ash.Is<TestNode>(entity);
+			Assert.AreEqual(IsNode, false);
+
+			TestNode node = null;
+			node = Ash.As<TestNode>(entity);
+			Assert.AreEqual(node, null);
+
+			Name name = new Name();
+			name.Value = "bob";
+			entity.Add(name);
+
+			Assert.AreEqual(nodeList.Count, 1);
+			
+			IsNode = Ash.Is<TestNode>(entity);
+			Assert.AreEqual(IsNode, true);
+
+			node = Ash.As<TestNode>(entity);
+			Assert.AreNotEqual(node, null);
+
+			Ash.RemoveEntity(entity);
+			Assert.AreEqual(nodeList.Count, 0); // entity should no longer be in nodeList
+		}
 	}
 }

@@ -78,7 +78,45 @@ namespace com.copperbyte.ash.core
 				pair.Value.AddIfMatch( entity );
 			}
 		}
-		
+
+		/**
+		 * Check if an entity is also a node 
+		 */
+		public bool Is<NT>(Entity entity) where NT:Node, new() 
+		{
+			Type nodeClass = typeof(NT);
+			if( families.ContainsKey(nodeClass) ) {  
+				Family<NT> family = (Family<NT>)families[nodeClass];
+				return family.Is(entity);
+			} else {
+				Family<NT> newFamily = new Family<NT>( nodeClass, this );
+				families[nodeClass] = newFamily;
+				foreach( Entity old_entity in entities.mEntitys ) {
+					newFamily.AddIfMatch( old_entity );
+				}
+				return newFamily.Is(entity);
+			}
+		}
+
+		/**
+		 * Get an entity as a node if it qualifies
+		 */
+		public NT As<NT>(Entity entity) where NT:Node, new() 
+		{
+			Type nodeClass = typeof(NT);
+			if( families.ContainsKey(nodeClass) ) {  
+				Family<NT> family = (Family<NT>)families[nodeClass];
+				return family.As(entity);
+			} else {
+				Family<NT> newFamily = new Family<NT>( nodeClass, this );
+				families[nodeClass] = newFamily;
+				foreach( Entity old_entity in entities.mEntitys ) {
+					newFamily.AddIfMatch( old_entity );
+				}
+				return newFamily.As(entity);
+			}
+		}
+
 		/**
 		 * Get a collection of nodes from the game, based on the type of the node required.
 		 * 

@@ -92,7 +92,7 @@ namespace com.copperbyte.ash.core
 					components.Add(type, type.Name);
 				}
 			}
-			
+						
 			/*
 			FieldInfo[] fields = nodeClass.GetFields();
 			foreach(FieldInfo field in fields) {
@@ -121,6 +121,21 @@ namespace com.copperbyte.ash.core
 				}
 			}*/
 		}		
+
+		// True if entity is currently know in this family
+		public bool Is(Entity entity) {
+			return entities.ContainsKey(entity);
+		}
+
+		// Null if entity is not known to this family, Non-null Node if known to this family
+		public NT As(Entity entity) {
+			NT node = null;
+			bool success = entities.TryGetValue(entity, out node);
+			if(success)
+				return node;
+			else
+				return null;
+		}
 		
 		public NodeList<NT> GetList()
 		{
