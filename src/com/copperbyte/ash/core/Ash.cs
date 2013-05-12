@@ -67,7 +67,15 @@ namespace com.copperbyte.ash.core
 			entity.componentAdded -= this.ComponentAdded;
 			entities.Remove( entity );
 		}
-		
+
+		/**
+		 * How many entities exist in the system. Mainly for debugging/testing, 
+		 *   seeing if a section cleans up everything it creates. 
+		 */
+		public int EntityCount() {
+			return entities.mEntitys.Count;
+		}
+
 		/**
 		 * @private
 		 */

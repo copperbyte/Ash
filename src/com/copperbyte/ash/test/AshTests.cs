@@ -210,5 +210,28 @@ namespace com.copperbyte.ash.test
 			Ash.RemoveEntity(entity);
 			Assert.AreEqual(nodeList.Count, 0); // entity should no longer be in nodeList
 		}
+
+
+		[Test]
+		public void testEntityCount() {
+			Entity entity = new Entity();
+			Id id = new Id();
+			id.Value = 1;
+			entity.Add(id);
+			Name name = new Name();
+			name.Value = "bob";
+			entity.Add(name);
+			
+			int Count = Ash.EntityCount();
+			Assert.AreEqual(Count, 0);
+			
+			Ash.AddEntity(entity);
+			Count = Ash.EntityCount();
+			Assert.AreEqual(Count, 1);
+			
+			Ash.RemoveEntity(entity);
+			Count = Ash.EntityCount();
+			Assert.AreEqual(Count, 0);
+		}
 	}
 }
