@@ -27,6 +27,14 @@ namespace com.copperbyte.ash.core
 		{
 			mComponents = new Dictionary<Type, Component>();
 		}
+
+		// For other components than the mandatory properties
+		public CT Get<CT>() where CT:Component {
+			return entity.Get<CT>();
+		}
+		public bool Has<CT>( ) where CT : Component {
+			return entity.Has<CT>();
+		}
 		
 		/* Example Node Class, must use Properties like this
 		 * public class TileRenderNode : Node
