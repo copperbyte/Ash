@@ -22,10 +22,10 @@ namespace com.copperbyte.ash.core
 		
 		// snip linked list implimentation
 		
-		internal Dictionary<Type, Component> mComponents;
+		//internal Dictionary<Type, Component> mComponents;
 		public Node()
 		{
-			mComponents = new Dictionary<Type, Component>();
+			;//mComponents = new Dictionary<Type, Component>();
 		}
 
 		// For other components than the mandatory properties

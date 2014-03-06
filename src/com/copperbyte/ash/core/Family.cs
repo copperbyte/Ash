@@ -196,13 +196,13 @@ namespace com.copperbyte.ash.core
 				}
 				NT node = nodePool.get();
 				node.entity = entity;
-				foreach ( KeyValuePair<Type, String> pair in components )
+				/*foreach ( KeyValuePair<Type, String> pair in components )
 				{
 					if(!node.mComponents.ContainsKey(pair.Key))
 						node.mComponents.Add(pair.Key, entity.Get( pair.Key ) );
 					else
 						node.mComponents[pair.Key] = entity.Get( pair.Key );
-				}
+				}*/
 				entities[entity] = node;
 				entity.componentRemoved += componentRemoved;
 				nodes.Add( node );
