@@ -3,12 +3,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{250A6D58-29C6-416A-87BF-916D37BC5E1C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Ash</RootNamespace>
     <AssemblyName>Ash</AssemblyName>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -45,6 +46,7 @@
     <Compile Include="src\com\copperbyte\ash\core\Ash.cs" />
     <Compile Include="src\com\copperbyte\ash\core\NodeMap.cs" />
     <Compile Include="src\com\copperbyte\ash\core\NodeMultiMap.cs" />
+    <Compile Include="src\com\copperbyte\ash\core\ComponentList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
